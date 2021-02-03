@@ -2,12 +2,16 @@ from flask import Flask
 from reddit_client import RedditClient
 from aggregator import Aggregator
 
+PERIOD = 3600
+TOP = 50
+
 app = Flask(__name__)
-aggregator = Aggregator(300)
+aggregator = Aggregator(PERIOD, TOP)
 client = RedditClient(aggregator)
 
 aggregator.start_aggregating()
 client.start_streaming()
+
 
 @app.route('/')
 def hello_world():
