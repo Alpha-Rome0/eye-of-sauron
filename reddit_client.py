@@ -1,4 +1,4 @@
-import json, praw, collections
+import json, praw, string
 import threading
 
 
@@ -15,6 +15,11 @@ class RedditClient:
         with open('symbols.json') as f:
             self.symbols = json.load(f)
 
+        with open('blacklist.txt') as f:
+            self.blacklist = set()
+            for line in f.readlines():
+                self.blacklist.add(line.strip('\n'))
+
         self.stream = threading.Thread(target=self.stream_comments, args=(aggregator,))
 
     def stream_comments(self, aggregator):
@@ -24,9 +29,8 @@ class RedditClient:
                     body = str(comment.body)
                     body = body.split()
                     for word in body:
-                        if word[0] == "$":
-                            aggregator.counter[word[1:]] += 1
-                        elif word in self.symbols:
+                        word = word.translate(str.maketrans('', '', string.punctuation))
+                        if word in self.symbols and word not in self.blacklist:
                             aggregator.counter[word] += 1
             except Exception as e:
                 print(e)

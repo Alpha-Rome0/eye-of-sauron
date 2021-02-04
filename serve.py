@@ -2,7 +2,7 @@ from flask import Flask
 from reddit_client import RedditClient
 from aggregator import Aggregator
 
-PERIOD = 3600
+PERIOD = 10800
 TOP = 50
 
 app = Flask(__name__)
