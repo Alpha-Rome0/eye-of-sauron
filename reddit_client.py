@@ -1,4 +1,6 @@
-import json, praw, string
+import json
+import praw
+import string
 import threading
 
 

@@ -1,14 +1,16 @@
 from flask import Flask
-from reddit_client import RedditClient
-from aggregator import Aggregator
 
-PERIOD = 10800
+from aggregator import Aggregator
+from reddit_client import RedditClient
+
+DB_FILENAME = "data.db"
+PERIOD = 60
 TOP = 50
 
 app = Flask(__name__)
-aggregator = Aggregator(PERIOD, TOP)
-client = RedditClient(aggregator)
 
+aggregator = Aggregator(PERIOD, TOP, DB_FILENAME)
+client = RedditClient(aggregator)
 aggregator.start_aggregating()
 client.start_streaming()
 
