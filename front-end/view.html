@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Area Spline</title>
+
+    <link href="assets/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-regular.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-medium.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-semibold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-bold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-extrabold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-con-heavy.css"/>
+
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-hairline.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-thin.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-extralight.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-ultralight.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-light.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-regular.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-medium.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-semibold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-bold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-extrabold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-heavy.css"/>
+
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-regular.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-medium.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-semibold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-bold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-extrabold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-exp-heavy.css"/>
+
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-regular.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-medium.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-semibold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-bold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-extrabold.css"/>
+    <link rel="stylesheet" href="http://www.superwindy.com/gardengrove/assets/css/gg-uexp-heavy.css"/>
+
+    <style>
+      
+        #chart {
+      max-width: 650px;
+      margin: 35px auto;
+    }
+      
+    </style>
+
+    <script>
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
+    </script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+
+    <script>
+      // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+      // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+      var _seed = 42;
+      Math.random = function() {
+        _seed = _seed * 16807 % 2147483647;
+        return (_seed - 1) / 2147483646;
+      };
+    </script>
+
+    
+  </head>
+
+  <body>
+
+    <header>
+      <img src="assets/images/logo@2x.png" width="367px" height="auto" />
+      <h1><span>6:41:23 PM EST</span> February 2, 2021</h1>
+    </header>
+
+     <div id="chart"></div>
+
+    <script>
+      
+        var options = {
+
+          series: [{
+          name: 'GME',
+          data: [18, 18, 28, 80, 112, 224, 226]
+        }, {
+          name: 'SNDL',
+          data: [1, 2, 2, 4, 54, 54, 189]
+        }, {
+          name: 'TLRY',
+          data: [2, 2, 2, 4, 3, 43, 121]
+        }, {
+          name: 'APHA',
+          data: [1, 2, 2, 1, 1, 14, 115]
+        }, {
+          name: 'AMC',
+          data: [10, 2, 2, 12, 12, 14, 37]
+        }, {
+          name: 'TSLA',
+          data: [115, 34, 2, 1, 1, 14, 2]
+        }],
+          chart: {
+          height: 350,
+          type: 'area'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          type: 'datetime',
+          categories: ["2021-01-03T00:00:00.000Z", "2021-01-04T00:00:00.000Z", "2021-01-05T00:00:00.000Z", "2021-01-06T00:00:00.000Z", "2021-01-07T00:00:00.000Z", "2021-01-08T00:00:00.000Z", "2021-01-09T00:00:00.000Z"]
+        },
+        tooltip: {
+          x: {
+            format: 'dd/MM/yy HH:mm'
+          },
+        },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+    </script>
+
+    
+  </body>
+</html>
