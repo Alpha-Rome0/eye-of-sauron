@@ -5,5 +5,5 @@ sql_create_data_table = """CREATE TABLE IF NOT EXISTS data (
                                 PRIMARY KEY (unix_time, ticker)
                             );"""
 
-sql_insert = ''' INSERT INTO data(ticker,counts)
+sql_insert = ''' INSERT INTO data(unix_time,ticker,counts)
                  VALUES(?,?,?) '''
