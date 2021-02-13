@@ -4,7 +4,7 @@ from aggregator import Aggregator
 from reddit_client import RedditClient
 
 DB_FILENAME = "data.db"
-PERIOD = 60
+PERIOD = 900
 TOP = 50
 
 app = Flask(__name__)

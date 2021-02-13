@@ -26,7 +26,7 @@ class Aggregator:
             for symbol in cur_counter:
                 self.velocity[symbol] = cur_counter[symbol] - self.prev_counter[symbol]
                 self.acceleration[symbol] = self.velocity[symbol] - self.prev_velocity[symbol]
-                row = (now, symbol, self.acceleration[symbol], self.velocity[symbol], cur_counter[symbol])
+                row = (now, symbol, cur_counter[symbol])
                 database_manager.insert_row_data(row)
             self.prev_counter = cur_counter.copy()
             self.prev_velocity = self.velocity.copy()
