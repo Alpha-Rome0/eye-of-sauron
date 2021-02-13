@@ -108,3 +108,4 @@ venv.bak/
 .idea/
 *.txt
 *.json
+!requirements.txt
