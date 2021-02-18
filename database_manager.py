@@ -33,3 +33,12 @@ class DatabaseManager:
             print(f"error inserting row: {e}")
 
         return cur.lastrowid
+
+    def query_data(self, time_range: tuple):
+        try:
+            cur = self.conn.cursor()
+            cur.execute(sql.sql_query, time_range)
+            self.conn.commit()
+        except Error as e:
+            print(f"error querying data: {e}")
+

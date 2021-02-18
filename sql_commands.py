@@ -7,3 +7,10 @@ sql_create_data_table = """CREATE TABLE IF NOT EXISTS data (
 
 sql_insert = ''' INSERT INTO data(unix_time,ticker,counts)
                  VALUES(?,?,?) '''
+
+sql_query = '''
+select ticker,sum(counts) counts from data
+where unix_time in (select unix_time from data 
+					where unix_time BETWEEN ? AND ?)
+group by ticker
+'''
