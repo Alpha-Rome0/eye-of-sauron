@@ -34,6 +34,8 @@ header h1 {
     header h1 span {
         display: inline-block;
         float: right;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
     }
 
 #chart, .chart-box {

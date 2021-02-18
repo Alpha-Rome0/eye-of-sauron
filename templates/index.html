@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Area Spline</title>
+    <title>Eye of Sauron</title>
 
     <link href="assets/styles.css" rel="stylesheet" />
 
@@ -92,28 +92,31 @@
      <div id="chart"></div>
 
     <script>
-      
+
         var options = {
 
-          series: [{
-          name: 'GME',
-          data: [18, 18, 28, 80, 112, 224, 226]
-        }, {
-          name: 'SNDL',
-          data: [1, 2, 2, 4, 54, 54, 189]
-        }, {
-          name: 'TLRY',
-          data: [2, 2, 2, 4, 3, 43, 121]
-        }, {
-          name: 'APHA',
-          data: [1, 2, 2, 1, 1, 14, 115]
-        }, {
-          name: 'AMC',
-          data: [10, 2, 2, 12, 12, 14, 37]
-        }, {
-          name: 'TSLA',
-          data: [115, 34, 2, 1, 1, 14, 2]
-        }],
+          // 'symbol' : 'GME',
+          // 'acc' : '91',
+          // 'vel' : '9',
+          // 'count' : '226',
+          // 'date' : '18/02/2021 06:53:55'
+
+          series: [
+
+          // Python loop for each symbol
+          {% for post in tickers %}
+            {
+            name: '{{ post.symbol }}',
+            data: [
+
+              // This Python script needs to loop for just the above 'symbol'
+              {% for post in tickers %}
+                {{ post.count }}
+              {% endfor %}
+            ]
+            },
+            {% endfor %}
+            ],
           chart: {
           height: 350,
           type: 'area'
@@ -126,7 +129,13 @@
         },
         xaxis: {
           type: 'datetime',
-          categories: ["2021-01-03T00:00:00.000Z", "2021-01-04T00:00:00.000Z", "2021-01-05T00:00:00.000Z", "2021-01-06T00:00:00.000Z", "2021-01-07T00:00:00.000Z", "2021-01-08T00:00:00.000Z", "2021-01-09T00:00:00.000Z"]
+          categories: [
+            
+            {% for post in tickers %}
+              "{{ post.date }}"
+            {% endfor %}
+
+            ]
         },
         tooltip: {
           x: {
